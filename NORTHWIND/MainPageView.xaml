@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModels="clr-namespace:NORTHWIND.ViewModels;assembly=NORTHWIND.ViewModels"
+             x:Class="NORTHWIND.MainPageView">
+
+    <!--
+    <ContentPage.BindingContext>
+        <ViewModels:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    -->
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="CustomerList" Grid.Column="0" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="20">
+                            <Label Text="{Binding CompanyName}" FontSize="Medium" FontAttributes="Bold"/>
+                            <Label Text="{Binding ContactName}" FontSize="Small" FontAttributes="Italic"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Strg+K+D -->
+        <!--
+        <StackLayout Grid.Column="1" 
+                     Orientation="Vertical"
+                     HorizontalOptions="Center" 
+                     VerticalOptions="Center">
+            <Label  HorizontalOptions="Center"
+                    Text="NORTHWIND"
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    />
+            <Label  HorizontalOptions="Center"
+                    Text="Demo" 
+                    />
+        </StackLayout>
+        -->
+
+        <Grid Grid.Column="1" BindingContext="{Binding Source={x:Reference CustomerList}, Path=SelectedItem}">
+            <Label Text="{Binding CompanyName}" />
+        </Grid>
+        
+        
+    </Grid>
+</ContentPage>
